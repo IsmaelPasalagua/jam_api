@@ -15,13 +15,14 @@ public class PostComments {
     private String title;
     private Date published;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "post_id")
     private Posts posts;
+
 
     //Getters
 
