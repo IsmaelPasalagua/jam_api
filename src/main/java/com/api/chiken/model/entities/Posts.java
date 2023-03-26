@@ -18,7 +18,7 @@ public class Posts {
 
     private Date published;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "user_id")
     private  User user;
 
