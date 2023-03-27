@@ -4,11 +4,11 @@ import com.api.chiken.model.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.api.chiken.model.entities.Posts;
+import com.api.chiken.model.entities.Post;
 import java.util.Optional;
 
 
 @Repository
-public interface PostsRepository extends JpaRepository<Posts, Long> {
-    Optional<Posts> findByUser(User user);
+public interface PostRepository extends JpaRepository<Post, Long> {
+    Optional<Post> findByUser(User user);
 }
