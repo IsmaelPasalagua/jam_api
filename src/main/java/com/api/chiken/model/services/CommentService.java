@@ -40,7 +40,6 @@ public class CommentService {
         User user = this.authService.user();
         List<Comment> currentCommentsUser = user.getComments();
         List<Comment> currentCommentsPost = post.getComments();
-        comment.setTitle(request.getTitle());
         comment.setContent(request.getContent());
         comment.setUser(user);
         comment.setPublished(new Date(System.currentTimeMillis()));
