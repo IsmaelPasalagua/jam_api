@@ -1,11 +1,14 @@
 package com.api.chiken.model.services;
 import com.api.chiken.model.entities.Post;
+import com.api.chiken.model.entities.User;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.api.chiken.model.repositories.PostRepository;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -13,37 +16,24 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
-    public ArrayList<Post> getAllPosts() {
-        return new ArrayList<>(postRepository.findAll());
+    public List<Post> index() {
+        return postRepository.findAll();
     }
 
-    public Post getPostById(Long id) {
-        return postRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Post not found with id: " + id));
+    public Optional<Post> get(Long id) {
+        return postRepository.findById(id);
     }
 
-    public Post createPost(Post post) {
-        // Aquí podrías realizar validaciones y lógica de negocio antes de guardar el post
+    public Post save(Post post) {
         return postRepository.save(post);
     }
 
-    public Post updatePost(Long id, Post post) {
-        // Verificar si existe el post con el id especificado
-        Post existingPost = getPostById(id);
-        // Actualizar los campos del post existente con los valores del post recibido como parámetro
-        existingPost.setTitle(post.getTitle());
-        existingPost.setSlug(post.getSlug());
-        existingPost.setSummary(post.getSummary());
-        existingPost.setPublished(post.getPublished());
-        existingPost.setUser(post.getUser());
-        // Guardar el post actualizado
-        return postRepository.save(existingPost);
+    public void delete(Long id) {
+        postRepository.deleteById(id);
     }
 
-    public void deletePost(Long id) {
-        // Verificar si existe el post con el id especificado
-        Post existingPost = getPostById(id);
-        // Eliminar el post
-        postRepository.delete(existingPost);
+    public List<Post> getByUser(User user) {
+        return postRepository.findByUser(user);
     }
 }
 

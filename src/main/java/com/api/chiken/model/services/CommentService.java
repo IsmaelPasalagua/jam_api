@@ -10,25 +10,24 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class CommentService {
 
     @Autowired
     private CommentRepository commentRepository;
 
-    public List<Comment> getAllPostComments() {
+    public List<Comment> index() {
         return commentRepository.findAll();
     }
 
-    public Optional<Comment> getPostCommentsById(Long id) {
+    public Optional<Comment> get(Long id) {
         return commentRepository.findById(id);
     }
 
-    public Comment savePostComments(Comment comment) {
+    public Comment save(Comment comment) {
         return commentRepository.save(comment);
     }
 
-    public void deletePostCommentsById(Long id) {
+    public void delete(Long id) {
         commentRepository.deleteById(id);
     }
 }
