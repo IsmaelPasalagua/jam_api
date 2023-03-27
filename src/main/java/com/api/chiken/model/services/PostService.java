@@ -33,11 +33,15 @@ public class PostService {
 
     public Post save(PostRequest request) {
         Post post = new Post();
+        User user = this.authService.user();
+        List<Post> currentPosts = user.getPosts();
         post.setTitle(request.getTitle());
         post.setSummary(request.getSummary());
-        post.setUser(authService.user());
+        post.setUser(user);
         post.setPublished(new Date(System.currentTimeMillis()));
-        return postRepository.save(post);
+        currentPosts.add(post);
+        user.setPosts(currentPosts);
+        return postRepository.saveAndFlush(post);
     }
 
     public void delete(Long id) {

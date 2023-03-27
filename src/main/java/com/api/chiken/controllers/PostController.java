@@ -1,7 +1,10 @@
 package com.api.chiken.controllers;
 
+import com.api.chiken.model.entities.Comment;
 import com.api.chiken.model.entities.Post;
+import com.api.chiken.model.requests.CommentRequest;
 import com.api.chiken.model.requests.PostRequest;
+import com.api.chiken.model.services.CommentService;
 import com.api.chiken.model.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,8 @@ import java.util.Optional;
 public class PostController {
     @Autowired
     private PostService postService;
+    @Autowired
+    private CommentService commentService;
 
    @GetMapping
     public ResponseEntity<List<Post>> index(){
@@ -25,6 +30,11 @@ public class PostController {
    public ResponseEntity<Post> save(@RequestBody PostRequest request){
        return ResponseEntity.ok().body(this.postService.save(request));
    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<Comment> saveComment(@PathVariable("id") Long id, @RequestBody CommentRequest request){
+        return ResponseEntity.ok().body(this.commentService.save(id, request));
+    }
 
    @GetMapping("/{id}")
    public ResponseEntity<Optional<Post>> getById(@PathVariable("id") Long id){
