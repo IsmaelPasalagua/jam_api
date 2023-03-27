@@ -1,9 +1,16 @@
 package com.api.chiken.model.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
-
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "post_comments")
 public class Comment {
@@ -22,49 +29,4 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
-
-
-    //Getters
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public Date getPublished() {
-        return published;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Post getPost() {
-        return post;
-    }
-
-    //Setters
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setPublished(Date published) {
-        this.published = published;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
-    }
 }
