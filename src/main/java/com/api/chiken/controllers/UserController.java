@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/user/{username}")
+    @GetMapping("/{username}")
     public ResponseEntity<User> getById(@PathVariable("username") String username){
         return ResponseEntity.ok().body(this.userService.getByUsername(username));
     }
